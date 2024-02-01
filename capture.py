@@ -2,7 +2,7 @@ import cv2
 import pyautogui
 import mediapipe as mp
 
-cap = cv2.VideoCapture(0) # 0 olursa : 
+cap = cv2.VideoCapture(0) # 0 olursa bilgisayar kamerasını kullanır, 1 olursa harici kamera kullanır
 
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1,
@@ -27,10 +27,20 @@ while True:
             index_finger_y = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].y
             thumb_y = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP].y
 
+
+            # işaret parmağı yukarı : ses açma 
+            # işaret parmağı aşağı : ses kısma
+         
+            
+        
+
+
             if index_finger_y < thumb_y:
                 hand_gesture = 'pointing up'
+                print('pointing up')
             elif index_finger_y > thumb_y:
                 hand_gesture = 'pointing down'
+                print('pointing down')
             else:
                 hand_gesture = 'other'
 
